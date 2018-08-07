@@ -1,0 +1,2 @@
+# HeroinCategory
+objClass Category
