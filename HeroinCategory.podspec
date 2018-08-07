@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "HeroinCategory"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "My Heroin Category."
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                  [0.0.1]
+                    here is description.
                    DESC
 
   s.homepage     = "https://skychen2012.github.io"
@@ -96,12 +96,37 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = "Classes/**/*.h"
 
-    s.subspec 'UIKit' do |ss|
-        ss.subspec 'UIImage' do |sss|
-            sss.source_files = 'Category/UIKit/UIImage/**.{h,m}'
-            sss.public_header_files = "Category/UIKit/UIImage/**.h"
+    s.subspec 'UIKit' do |kit|
+        kit.subspec 'UIImage' do |image|
+            image.source_files = 'Category/UIKit/UIImage/**.{h,m}'
+            image.public_header_files = "Category/UIKit/UIImage/**.h"
         end
+        kit.subspec 'UILable' do |lable|
+            lable.source_files = 'Category/UIKit/UILable/**.{h,m}'
+            lable.public_header_files = "Category/UIKit/UILable/**.h"
+        end 
     end
+
+    s.subspec 'Foundation' do |foundation|
+        foundation.source_files = 'Category/Foundation/**/*'
+    end
+
+    s.subspec 'CoreData' do |coredata|
+        coredata.source_files = 'Category/CoreData/**/*'
+    end
+
+    s.subspec 'MapKit' do |mapkit|
+        mapkit.source_files = 'Category/MapKit/**/*'
+    end
+
+    s.subspec 'CoreLocation' do |corelocation|
+        corelocation.source_files = 'Category/CoreLocation/**/*'
+    end
+
+    s.subspec 'QuartzCore' do |quartzcore|
+        quartzcore.source_files = 'Category/QuartzCore/**/*'
+    end
+
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

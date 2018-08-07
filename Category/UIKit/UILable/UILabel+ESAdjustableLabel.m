@@ -30,7 +30,7 @@
   //// ---------------------------
   // First, reset some basic parameters  
   [self setNumberOfLines:0];
-  [self setLineBreakMode:UILineBreakModeWordWrap];
+  [self setLineBreakMode:NSLineBreakByWordWrapping];
   
   // If maxSize is set to CGSizeZero, then assume the max width
   // is the size of the device screen minus the default
@@ -41,11 +41,12 @@
     
   }
   
-  // Now, calculate the size of the label constrained to maxSize
-  CGSize tempSize = [[self text] sizeWithFont:[self font] 
-                            constrainedToSize:maxSize 
-                                lineBreakMode:[self lineBreakMode]];
+  // Now, calculate the size of the label constrained to maxSize fix by benson 2018
+//  CGSize tempSize = [[self text] sizeWithFont:[self font] constrainedToSize:maxSize lineBreakMode:[self lineBreakMode]];    
   
+   CGSize tempSize = [[self text] boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[self font]} context:nil].size;
+    
+    
   // If minSize is specified (not CGSizeZero) then 
   // check if the new calculated size is smaller than
   // the minimum size
@@ -75,11 +76,11 @@
     // Create a temporary font object
     labelFont = [UIFont fontWithName:[labelFont fontName]
                                 size:fSize];
-    // Calculate the frame size
-    calculatedSizeWithCurrentFontSize = 
-    [[self text] sizeWithFont:labelFont 
-            constrainedToSize:unconstrainedSize 
-                lineBreakMode:UILineBreakModeWordWrap];
+    // Calculate the frame size -- fix by benson 2018
+//    calculatedSizeWithCurrentFontSize = [[self text] sizeWithFont:labelFont constrainedToSize:unconstrainedSize lineBreakMode:UILineBreakModeWordWrap];
+      calculatedSizeWithCurrentFontSize =
+      [[self text] boundingRectWithSize:unconstrainedSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:labelFont} context:nil].size;
+      
     // Reduce the temporary font size value
     fSize--;
   } while (calculatedSizeWithCurrentFontSize.height > maxSize.height);
@@ -122,7 +123,7 @@
 {
   [self adjustLabelToMaximumSize:CGSizeZero 
                      minimumSize:CGSizeZero 
-                 minimumFontSize:[self minimumFontSize]];
+                 minimumFontSize:0]; // fix by Benson - 2018 
 }
 
 @end
